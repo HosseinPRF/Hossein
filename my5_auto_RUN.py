@@ -8,13 +8,14 @@ from sklearn.metrics import accuracy_score
 
 # ===== پیکربندی =====
 TRAIN_FILE = 'buy.csv'  # فایل دیتای آموزشی
-INPUT_FILE = 'input_buy.csv'  # فایل واسط تولیدی توسط MQL5
+INPUT_FILE = 'inputFile_Python.csv'  # فایل واسط تولیدی توسط MQL5
 OUTPUT_FILE = 'prediction_result.txt'  # خروجی‌ای که MQL5 می‌خونه
-DATA_FOLDER = 'G:/3-ALL Python and AI/my codes'  # مسیر پوشه Files متاتریدر
+DATA_FOLDER_L = 'C:/pythonFiles'
+DATA_FOLDER = 'C:/Users/Hossein/AppData/Roaming/MetaQuotes/Tester/D0E8209F77C8CF37AD8BF550E51FF075/Agent-127.0.0.1-3000/MQL5/Files'  # مسیر پوشه Files متاتریدر
 
 INPUT_PATH = os.path.join(DATA_FOLDER, INPUT_FILE)
 OUTPUT_PATH = os.path.join(DATA_FOLDER, OUTPUT_FILE)
-TRAIN_PATH = os.path.join(DATA_FOLDER, TRAIN_FILE)
+TRAIN_PATH = os.path.join(DATA_FOLDER_L, TRAIN_FILE)
 
 # ===================== Classes =====================
 
