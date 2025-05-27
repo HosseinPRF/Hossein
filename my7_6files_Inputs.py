@@ -7,15 +7,15 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
 # ===== پیکربندی =====
-MODEL_TAGS = ["15min", "1h", "2h", "3h", "4h", "1d"]
+MODEL_TAGS = ["15minBuy", "1hBuy", "2hBuy", "3hBuy", "4hBuy", "1DBuy"]
 
-DATA_FOLDER_L = 'C:/pythonFiles'
+DATA_FOLDER_L = 'G:/3-ALL Python and AI/my codes/inputs' # 'C:/pythonFiles'
 DATA_FOLDER = 'C:/Users/Hossein/AppData/Roaming/MetaQuotes/Tester/D0E8209F77C8CF37AD8BF550E51FF075/Agent-127.0.0.1-3000/MQL5/Files'
 
 INPUT_FILE = 'inputFile_Python.csv'
 INPUT_PATH = os.path.join(DATA_FOLDER, INPUT_FILE)
 
-TRAIN_FILES = {tag: f"train_{tag}.csv" for tag in MODEL_TAGS}
+TRAIN_FILES = {tag: f"{tag}.csv" for tag in MODEL_TAGS}
 TRAIN_PATHS = {tag: os.path.join(DATA_FOLDER_L, fname) for tag, fname in TRAIN_FILES.items()}
 
 OUTPUT_FILES = {tag: f"prediction_{tag}.txt" for tag in MODEL_TAGS}
