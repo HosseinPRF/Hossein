@@ -9,8 +9,8 @@ from xgboost import XGBClassifier
 # ===== پیکربندی =====
 MODEL_TAGS = ["15minBuy", "1hBuy", "2hBuy", "3hBuy", "4hBuy", "1DBuy"]
 
-DATA_FOLDER_L = 'C:/pythonFiles/inputs'   # 'G:/3-ALL Python and AI/my codes/inputs' #
-DATA_FOLDER = 'C:/Users/Hossein/AppData/Roaming/MetaQuotes/Tester/D0E8209F77C8CF37AD8BF550E51FF075/Agent-127.0.0.1-3000/MQL5/Files'
+DATA_FOLDER_L = 'G:/3-ALL Python and AI/my codes/inputs'  
+DATA_FOLDER = 'G:/3-ALL Python and AI/my codes/input_Buy_file'
 
 INPUT_FILE = 'inputFile_Python.csv'
 INPUT_PATH = os.path.join(DATA_FOLDER, INPUT_FILE)
@@ -104,12 +104,22 @@ class Predictor:
         new_df = new_df[self.feature_columns]
         return new_df
 
+    def convert_probs_to_continuous(self, probs):
+        values = [-1, 0, 1]  # ضررده، بدون تغییر، سودده
+        continuous_value = sum(p * v for p, v in zip(probs, values))
+        return continuous_value
+
     def predict(self, data_dict):
         X = self.preprocess_new_data(data_dict)
         pred_class = self.model.predict(X)[0]
-        pred_proba = self.model.predict_proba(X)[0][pred_class]
+        pred_proba = self.model.predict_proba(X)[0]
+        
+        continuous_pred = self.convert_probs_to_continuous(pred_proba)
+        
         labels = {0: 'ضررده', 1: 'بدون تغییر', 2: 'سودده'}
-        return pred_class, pred_proba, labels[pred_class]
+        pred_label = labels[pred_class]
+        
+        return pred_class, continuous_pred, pred_label, pred_proba
 
 
 def read_input_file(filename):
@@ -144,13 +154,15 @@ if __name__ == '__main__':
                 input_data = read_input_file(INPUT_PATH)
 
                 for tag, predictor in predictors.items():
-                    pred_class, pred_proba, pred_label = predictor.predict(input_data)
+                    pred_class, continuous_pred, pred_label, pred_proba = predictor.predict(input_data)
                     output_path = OUTPUT_PATHS[tag]
 
+                    # فقط نوشتن احتمال ها به ترتیب: سودده، بدون تغییر، ضررده
                     with open(output_path, 'w', encoding='utf-8') as f:
-                        f.write(f"{pred_proba:.6f}")
+                        f.write(f"{pred_proba[2]:.6f} {pred_proba[1]:.6f} {pred_proba[0]:.6f}")
 
-                    print(f"📥 {tag} → Prediction: {pred_label} | Probability: {pred_proba:.4f}")
+                    print(f"📥 {tag} → Prediction: {pred_label} | "
+                          f"Probs: سودده={pred_proba[2]:.3f}, بدون تغییر={pred_proba[1]:.3f}, ضررده={pred_proba[0]:.3f}")
 
                 os.remove(INPUT_PATH)
                 print("\n✅ Predictions done. Waiting for next input...\n")
