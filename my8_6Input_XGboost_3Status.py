@@ -9,10 +9,11 @@ from xgboost import XGBClassifier
 # ===== پیکربندی =====
 MODEL_TAGS = ["15minBuy", "1hBuy", "2hBuy", "3hBuy", "4hBuy", "1DBuy"]
 
-DATA_FOLDER_L = 'G:/3-ALL Python and AI/my codes/inputs'  
-DATA_FOLDER = 'G:/3-ALL Python and AI/my codes/input_Buy_file'
+DATA_FOLDER_L = 'C:/pythonFiles/inputs'  
+DATA_FOLDER = 'C:/Users/Hossein/AppData/Roaming/MetaQuotes/Terminal/Common/Files/'
+#'C:/Users/Hossein/AppData/Roaming/MetaQuotes/Tester/D0E8209F77C8CF37AD8BF550E51FF075/Agent-127.0.0.1-3000/MQL5/Files'
 
-INPUT_FILE = 'inputFile_Python.csv'
+INPUT_FILE = 'inputFile_Python2.csv'
 INPUT_PATH = os.path.join(DATA_FOLDER, INPUT_FILE)
 
 TRAIN_FILES = {tag: f"{tag}.csv" for tag in MODEL_TAGS}
