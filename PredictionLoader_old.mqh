@@ -18,7 +18,7 @@ public:
          model_tags[i] = tags[i];
      }
 
-   // خواندن فایل پیش‌بینی (پشتیبانی از 2 یا 3 مقدار)
+   // خواندن فایل پیش‌بینی (از پوشه FILE_COMMON)
    bool ReadPredictionFile(string filename, double &profit_prob, double &neutral_prob, double &loss_prob)
      {
       int file_handle = FileOpen(filename, FILE_READ | FILE_TXT | FILE_ANSI | FILE_COMMON);
@@ -34,24 +34,15 @@ public:
 
       string probs[];
       int count = StringSplit(line, ' ', probs);
-
-      if(count == 3)
-        {
-         profit_prob  = StringToDouble(probs[0]);
-         neutral_prob = StringToDouble(probs[1]);
-         loss_prob    = StringToDouble(probs[2]);
-        }
-      else if(count == 2)
-        {
-         profit_prob  = StringToDouble(probs[0]);
-         loss_prob    = StringToDouble(probs[1]);
-         neutral_prob = 0.0;  // یا -1 بسته به نیاز شما
-        }
-      else
+      if(count < 3)
         {
          Print("❌ File format error in ", filename);
          return false;
         }
+
+      profit_prob  = StringToDouble(probs[0]);
+      neutral_prob = StringToDouble(probs[1]);
+      loss_prob    = StringToDouble(probs[2]);
 
       return true;
      }
