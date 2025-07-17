@@ -9,8 +9,8 @@ from xgboost import XGBClassifier
 # ===== Configuration =====
 MODEL_TAGS = ["15minBuy", "1hBuy", "2hBuy", "3hBuy", "4hBuy", "1DBuy"]
 
-DATA_FOLDER_L ='G:/3-ALL Python and AI/my codes/inputs'  #'C:/pythonFiles/inputs'  #     'G:/3-ALL Python and AI/my codes/inputs'
-DATA_FOLDER = 'G:/3-ALL Python and AI/my codes/input_Buy_file/CSVBuy' #'C:/Users/Hossein/AppData/Roaming/MetaQuotes/Terminal/Common/Files/'   # 'G:/3-ALL Python and AI/my codes/input_Buy_file'
+DATA_FOLDER_L ='C:/pythonFiles/inputs'  #     'G:/3-ALL Python and AI/my codes/inputs'
+DATA_FOLDER =  'C:/Users/Hossein/AppData/Roaming/MetaQuotes/Terminal/Common/Files/' # 'G:/3-ALL Python and AI/my codes/input_Buy_file/CSVBuy'
 
 INPUT_FILE = 'inputFile_Python2.csv'
 INPUT_PATH = os.path.join(DATA_FOLDER, INPUT_FILE)
